@@ -494,14 +494,14 @@ void process_screens()
   {
     case 0 :{ JB.JetiBox(ABOUT_1,ABOUT_2);   break;}
     case 2 :{ JB.JetiBox(LastMessage);   break;}    
-    case 1 :{ 
+       case 1 :{ 
       msg_line1[0] = 0;      msg_line2[0] = 0;
       if (motor_armed == 1)
         strcat_P((char*)&msg_line1,(prog_char*)F("ARM "));
         else
         strcat_P((char*)&msg_line1,(prog_char*)F("DIS "));
 
-   if (osd_fix_type_jeti == 0)
+      if (osd_fix_type_jeti == 0)
         strcat_P((char*)&msg_line1,(prog_char*)F("NO:")); // no Sats, HW 2017-07-23
         else
         if (osd_fix_type_jeti == 1)
@@ -529,12 +529,11 @@ void process_screens()
       strcat((char*)&msg_line1,(char*)&temp);
       strcat_P((char*)&msg_line1,(prog_char*)F("V"));
 
-      // strncpy((char*)&msg_line2,(char*)LastMessage,LCDMaxPos/2);
+     // strncpy((char*)&msg_line2,(char*)LastMessage,LCDMaxPos/2); removed this HW 2017-07-23
+     
+     // and replaced by this 
       
-      
-      
-    
-    const __FlashStringHelper* mode_str=F("unkn");
+          const __FlashStringHelper* mode_str=F("unkn");
     if(apm_mav_type == 1){ //ArduPlane
         if (osd_mode == 0)       mode_str = F("Manu"); //Manual
         else if (osd_mode == 1)  mode_str = F("Circ"); //Circle
@@ -572,31 +571,31 @@ void process_screens()
     }
     
  
-        strcat_P((char*)&msg_line1,(prog_char*)mode_str);
-       strcat_P((char*)&msg_line1,(prog_char*)F(" Alt:"));
+    //  msg_line1[0] = 0;      msg_line2[0] = 0; removed  HW 2017-07-23
+        strcat_P((char*)&msg_line2,(prog_char*)mode_str);
+       strcat_P((char*)&msg_line2,(prog_char*)F(" Alt:"));
       temp[0] = 0;
       floatToString((char*)&temp,osd_alt,1);
-      strcat((char*)&msg_line1,(char*)&temp);
-      strcat_P((char*)&msg_line1,(prog_char*)F("m"));
-	    
-JB.JetiBox((char*)&msg_line1,(char*)&msg_line2);
+      strcat((char*)&msg_line2,(char*)&temp);
+      strcat_P((char*)&msg_line2,(prog_char*)F("m"));  
+      JB.JetiBox((char*)&msg_line1,(char*)&msg_line2);
     break;}    
+		  
     case 3 :{ 
-      
-     msg_line1[0] = 0;      msg_line2[0] = 0;
-//        strcat_P((char*)&msg_line1,(prog_char*)mode_str);
-       strcat_P((char*)&msg_line1,(prog_char*)F("Alt:"));
+      msg_line1[0] = 0;      msg_line2[0] = 0;
+      strcat_P((char*)&msg_line1,(prog_char*)F("Alt:"));
       temp[0] = 0;
       floatToString((char*)&temp,osd_alt,1);
       strcat((char*)&msg_line1,(char*)&temp);
- //     strcat_P((char*)&msg_line1,(prog_char*)F("m")); /removed all units to save space, HW 2017-07-23
+      strcat_P((char*)&msg_line1,(prog_char*)F("m")); 
       
       strcat_P((char*)&msg_line2,(prog_char*)F("Dis:"));
      temp[0] = 0;
-      //floatToString((char*)&temp,osd_home_distance,0);
+      floatToString((char*)&temp,osd_home_distance,0);
       itoa(osd_home_distance,(char*)&temp,10);
       strcat((char*)&msg_line2,(char*)&temp);
       strcat_P((char*)&msg_line2,(prog_char*)F(" Dir:"));
+      floatToString((char*)&temp,osd_home_heading,0);
       itoa (osd_home_heading,(char*)&temp,10);
       strcat((char*)&msg_line2,(char*)&temp);
       //strcat_P((char*)&msg_line2,(prog_char*)F("°")); //removed becasue of suspected overflow of line2 in jetibox, HW 2017-07-23
@@ -638,10 +637,10 @@ JB.JetiBox((char*)&msg_line1,(char*)&msg_line2);
       temp[0] = 0;
       itoa(osd_pitch,(char*)&temp,10);
       strcat((char*)&msg_line2,(char*)&temp);
-      strcat_P((char*)&msg_line2,(prog_char*)F(" Alt:"));
-      itoa (osd_alt,(char*)&temp,10);
-      strcat((char*)&msg_line2,(char*)&temp);
-
+//      strcat_P((char*)&msg_line2,(prog_char*)F(" Alt:"));
+//      floatToString((char*)&temp,osd_alt,1);
+//      strcat((char*)&msg_line1,(char*)&temp);
+	    
       JB.JetiBox((char*)&msg_line1,(char*)&msg_line2);
       break;}    
     case MAX_SCREEN :{ 
