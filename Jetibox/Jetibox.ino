@@ -40,9 +40,16 @@
 #define ITEMTYPE_1 F("")
 #define ITEMVAL_1 (short*)&motor_armed
 
-#define ITEMNAME_2 F("Batt %")
-#define ITEMTYPE_2 F("%")
-#define ITEMVAL_2 (short*)&osd_battery_remaining_A
+//#define ITEMNAME_2 F("Batt %")
+//#define ITEMTYPE_2 F("%")
+//#define ITEMVAL_2 (short*)&osd_battery_remaining_A
+// switched batt % with Alt, since Alt did not get sensor data, and i find Batt % rather useless
+//in fact everything highr 6 does not get evaluated as sensors data in EX sensors, except HDOP, GPSFix and GPSSats, 
+//which doesnt make much sense, i cant figure out why, yet
+
+#define ITEMNAME_2 F("Alt")
+#define ITEMTYPE_2 F("m")
+#define ITEMVAL_2 &osd_alt
 
 #define ITEMNAME_3 F("Batt V")
 #define ITEMTYPE_3 F("V")
@@ -84,9 +91,13 @@
 #define ITEMTYPE_8 F("")
 #define ITEMVAL_8 (uint8_t*)&gps_lon
 
-#define ITEMNAME_9 F("Alt")
-#define ITEMTYPE_9 F("m")
-#define ITEMVAL_9 &osd_alt
+#define ITEMNAME_9 F("Batt %")
+#define ITEMTYPE_9 F("%")
+#define ITEMVAL_9 (short*)&osd_battery_remaining_A
+
+//#define ITEMNAME_9 F("Alt")
+//#define ITEMTYPE_9 F("m")
+//#define ITEMVAL_9 &osd_alt
 //#define ITEMVAL_9 &debug3
 
 #define ITEMNAME_10 F("Home Dir")
@@ -438,14 +449,14 @@ void setup()
     //values are linked so we don't need setValue during every change but one time is enoug
     
     JB.setValue(1,ITEMVAL_1);
-    JB.setValue(2,ITEMVAL_2);
+    JB.setValue(2,ITEMVAL_2,1);
     JB.setValue(3,ITEMVAL_3,1);
     JB.setValue(4,ITEMVAL_4,1);
     JB.setValue(5,ITEMVAL_5);
     JB.setValue(6,ITEMVAL_6,1);
     JB.setValueGPS(7,ITEMVAL_7);
     JB.setValueGPS(8,ITEMVAL_8);
-    JB.setValue(9,ITEMVAL_9,1);
+    JB.setValue(9,ITEMVAL_9);
     JB.setValue(10,ITEMVAL_10);
     JB.setValue(11,ITEMVAL_11);
     JB.setValue(12,ITEMVAL_12,2);
