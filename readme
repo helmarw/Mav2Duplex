@@ -12,6 +12,7 @@ Mods:
 Issues:
 - DC-16 (maybe others too): some sensor values are displayed in Jetibox-emulation but not as seperate sensors
   hence they will not be logged (e.g. altitude, lat, lon, heading, distance) not sure waht the problem is yet
+ workaround atm: swiched sensor "Batt %" with "Alt" my guess is there must be something wrong in the library JETI_EX_SENSOR
 
 --------------
 
