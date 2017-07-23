@@ -501,14 +501,17 @@ void process_screens()
         else
         strcat_P((char*)&msg_line1,(prog_char*)F("DIS "));
 
-      if (osd_fix_type_jeti == 0)
-        strcat_P((char*)&msg_line1,(prog_char*)F("NO:"));
+   if (osd_fix_type_jeti == 0)
+        strcat_P((char*)&msg_line1,(prog_char*)F("NO:")); // no Sats, HW 2017-07-23
         else
-        if (osd_fix_type_jeti == 2)
-          strcat_P((char*)&msg_line1,(prog_char*)F("2D:"));
+        if (osd_fix_type_jeti == 1)
+          strcat_P((char*)&msg_line1,(prog_char*)F("NO:")); // <3 Sats, 1D but essentially NO Fix too, HW 2017-07-23
           else
           if (osd_fix_type_jeti == 2)
-            strcat_P((char*)&msg_line1,(prog_char*)F("3D:"));        
+            strcat_P((char*)&msg_line1,(prog_char*)F("2D:"));  // 3-4 Sats, HW 2017-07-23 
+             else
+             if (osd_fix_type_jeti == 3)
+                 strcat_P((char*)&msg_line1,(prog_char*)F("3D:"));  // >4 Sats, HW 2017-07-23          
 
       temp[0] = 0;
       int i = osd_satellites_visible;
@@ -526,12 +529,10 @@ void process_screens()
       strcat((char*)&msg_line1,(char*)&temp);
       strcat_P((char*)&msg_line1,(prog_char*)F("V"));
 
-      strncpy((char*)&msg_line2,(char*)LastMessage,LCDMaxPos/2);
+      // strncpy((char*)&msg_line2,(char*)LastMessage,LCDMaxPos/2);
       
       
-      JB.JetiBox((char*)&msg_line1,(char*)&msg_line2);
-    break;}    
-    case 3 :{ 
+      
     
     const __FlashStringHelper* mode_str=F("unkn");
     if(apm_mav_type == 1){ //ArduPlane
@@ -571,23 +572,34 @@ void process_screens()
     }
     
  
-      msg_line1[0] = 0;      msg_line2[0] = 0;
         strcat_P((char*)&msg_line1,(prog_char*)mode_str);
        strcat_P((char*)&msg_line1,(prog_char*)F(" Alt:"));
       temp[0] = 0;
       floatToString((char*)&temp,osd_alt,1);
       strcat((char*)&msg_line1,(char*)&temp);
       strcat_P((char*)&msg_line1,(prog_char*)F("m"));
+	    
+JB.JetiBox((char*)&msg_line1,(char*)&msg_line2);
+    break;}    
+    case 3 :{ 
+      
+     msg_line1[0] = 0;      msg_line2[0] = 0;
+//        strcat_P((char*)&msg_line1,(prog_char*)mode_str);
+       strcat_P((char*)&msg_line1,(prog_char*)F("Alt:"));
+      temp[0] = 0;
+      floatToString((char*)&temp,osd_alt,1);
+      strcat((char*)&msg_line1,(char*)&temp);
+ //     strcat_P((char*)&msg_line1,(prog_char*)F("m")); /removed all units to save space, HW 2017-07-23
       
       strcat_P((char*)&msg_line2,(prog_char*)F("Dis:"));
      temp[0] = 0;
       //floatToString((char*)&temp,osd_home_distance,0);
       itoa(osd_home_distance,(char*)&temp,10);
       strcat((char*)&msg_line2,(char*)&temp);
-      strcat_P((char*)&msg_line2,(prog_char*)F("m Dir:"));
+      strcat_P((char*)&msg_line2,(prog_char*)F(" Dir:"));
       itoa (osd_home_heading,(char*)&temp,10);
       strcat((char*)&msg_line2,(char*)&temp);
-      strcat_P((char*)&msg_line2,(prog_char*)F("°"));
+      //strcat_P((char*)&msg_line2,(prog_char*)F("°")); //removed becasue of suspected overflow of line2 in jetibox, HW 2017-07-23
       
 
       JB.JetiBox((char*)&msg_line1,(char*)&msg_line2);
