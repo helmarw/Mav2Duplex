@@ -1,3 +1,20 @@
+Mav2Duplex 
+Version 1.1b 2017-07-23
+
+Fixes: 
+- osd_fix_type_jeti corrected, now all values (0..3) are evaluated
+- some screens had overflowing lines, made it hard to read
+
+Mods:
+- edited screens so that they look simila to the one mikrokopter provides
+- condensed all important parameters to one screen (screen 1 default)
+
+Issues:
+- DC-16 (maybe others too): some sensor values are displayed in Jetibox-emulation but not as seperate sensors
+  hence they will not be logged (e.g. altitude, lat, lon, heading, distance) not sure waht the problem is yet
+
+--------------
+
 Mav2Duplex
 Version 1.1
 (c) DevFor8.com - info@devfor8.com
