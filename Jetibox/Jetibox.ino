@@ -63,7 +63,6 @@
 #define ITEMTYPE_5 F("mAh")
 #define ITEMVAL_5  &osd_capacity_mA
 
-/* the following parameters are not used by me
 #define ITEMNAME_6 F("Yaw")
 #define ITEMTYPE_6 F("Deg")
 #define ITEMVAL_6 (short*)&osd_yaw
@@ -77,23 +76,27 @@
 #define ITEMTYPE_8 F("Deg")
 #define ITEMVAL_8 (short*)&osd_roll
 //#define ITEMVAL_8 (short*)&debug2
-*/
+
 // Climb rate and GPS pos added
-#define ITEMNAME_6 F("Climb")
-#define ITEMTYPE_6 F("m/s")
-#define ITEMVAL_6  &osd_climb
+//#define ITEMNAME_6 F("Climb")
+//#define ITEMTYPE_6 F("m/s")
+//#define ITEMVAL_6  &osd_climb
 
-#define ITEMNAME_7 F("Lat")
-#define ITEMTYPE_7 F("")
-#define ITEMVAL_7 (uint8_t*)&gps_lat
+//#define ITEMNAME_7 F("Lat")
+//#define ITEMTYPE_7 F("")
+//#define ITEMVAL_7 (uint8_t*)&gps_lat
 
-#define ITEMNAME_8 F("Lon")
-#define ITEMTYPE_8 F("")
-#define ITEMVAL_8 (uint8_t*)&gps_lon
+//#define ITEMNAME_8 F("Lon")
+//#define ITEMTYPE_8 F("")
+//#define ITEMVAL_8 (uint8_t*)&gps_lon
 
-#define ITEMNAME_9 F("Batt %")
-#define ITEMTYPE_9 F("%")
-#define ITEMVAL_9 (short*)&osd_battery_remaining_A
+#define ITEMNAME_9 F("Climb")
+#define ITEMTYPE_9 F("m/s")
+#define ITEMVAL_9  &osd_climb
+
+//#define ITEMNAME_9 F("Batt %")
+//#define ITEMTYPE_9 F("%")
+//#define ITEMVAL_9 (short*)&osd_battery_remaining_A
 
 //#define ITEMNAME_9 F("Alt")
 //#define ITEMTYPE_9 F("m")
@@ -453,10 +456,10 @@ void setup()
     JB.setValue(3,ITEMVAL_3,1);
     JB.setValue(4,ITEMVAL_4,1);
     JB.setValue(5,ITEMVAL_5);
-    JB.setValue(6,ITEMVAL_6,1);
-    JB.setValueGPS(7,ITEMVAL_7);
-    JB.setValueGPS(8,ITEMVAL_8);
-    JB.setValue(9,ITEMVAL_9);
+    JB.setValue(6,ITEMVAL_6);
+    JB.setValue(7,ITEMVAL_7);
+    JB.setValue(8,ITEMVAL_8);
+    JB.setValue(9,ITEMVAL_9,1);
     JB.setValue(10,ITEMVAL_10);
     JB.setValue(11,ITEMVAL_11);
     JB.setValue(12,ITEMVAL_12,2);
