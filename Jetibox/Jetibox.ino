@@ -521,7 +521,7 @@ void process_screens()
           if (osd_fix_type_jeti == 2)
             strcat_P((char*)&msg_line1,(prog_char*)F("2D:"));  // 3-4 Sats, HW 2017-07-23 
              else
-             if (osd_fix_type_jeti == 3)
+             if (osd_fix_type_jeti >= 3)
                  strcat_P((char*)&msg_line1,(prog_char*)F("3D:"));  // >4 Sats, HW 2017-07-23          
 
       temp[0] = 0;
