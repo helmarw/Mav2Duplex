@@ -94,13 +94,13 @@
 #define ITEMTYPE_9 F("m/s")
 #define ITEMVAL_9  &osd_climb
 
-#define ITEMNAME_10 F("Home Dir")
-#define ITEMTYPE_10 F("Deg")
-#define ITEMVAL_10 (short*)&osd_home_heading
+#define ITEMNAME_10 F("Air Speed")
+#define ITEMTYPE_10 F("m/s")
+#define ITEMVAL_10 &osd_airspeed
 
-#define ITEMNAME_11 F("Home Dist")
-#define ITEMTYPE_11 F("m")
-#define ITEMVAL_11 (short*)&osd_home_distance
+#define ITEMNAME_11 F("Heading")
+#define ITEMTYPE_11 F("Deg")
+#define ITEMVAL_11 &osd_heading
 
 #define ITEMNAME_12 F("HDOP")
 #define ITEMTYPE_12 F("")
@@ -114,7 +114,7 @@
 #define ITEMTYPE_14 F("")
 #define ITEMVAL_14 (short*)&osd_satellites_visible
 
-#define ITEMNAME_15 F("Speed")
+#define ITEMNAME_15 F("Ground Speed")
 #define ITEMTYPE_15 F("m/s")
 #define ITEMVAL_15  &osd_groundspeed
 
@@ -451,8 +451,8 @@ void setup()
     JB.setValue(7,ITEMVAL_7);
     JB.setValue(8,ITEMVAL_8);
     JB.setValue(9,ITEMVAL_9,1);
-    JB.setValue(10,ITEMVAL_10);
-    JB.setValue(11,ITEMVAL_11);
+    JB.setValue(10,ITEMVAL_10,1);
+    JB.setValue(11,ITEMVAL_11,1);
     JB.setValue(12,ITEMVAL_12,2);
     JB.setValue(13,ITEMVAL_13);
     JB.setValue(14,ITEMVAL_14);
