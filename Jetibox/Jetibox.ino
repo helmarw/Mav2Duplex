@@ -791,7 +791,7 @@ void loop()
 //    if (Serial.available() > 0) //at least beat should fill
 //      read_mavlink(5);
 
-    setHomeVars();   // calculate and set Distance from home and Direction to home
+//    setHomeVars();   // calculate and set Distance from home and Direction to home, no GPS evoluated atm, HW 2017-07-25
    
     
 //    if (Serial.available() > 0) //at least beat should fill
