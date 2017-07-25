@@ -847,5 +847,5 @@ void loop()
   
   
   //debug2 = wait;
- calcGPS(); // recalc GPS vars for duplex fix by rosewhite
+  // calcGPS(); // recalc GPS vars for duplex fix by rosewhite, romoved since no gps will be evaluated atm, HW 2017-07-25
 }
