@@ -44,8 +44,6 @@
 //#define ITEMTYPE_2 F("%")
 //#define ITEMVAL_2 (short*)&osd_battery_remaining_A
 // switched batt % with Alt, since Alt did not get sensor data, and i find Batt % rather useless
-//in fact everything highr 6 does not get evaluated as sensors data in EX sensors, except HDOP, GPSFix and GPSSats, 
-//which doesnt make much sense, i cant figure out why, yet
 
 #define ITEMNAME_2 F("Alt")
 #define ITEMTYPE_2 F("m")
@@ -77,6 +75,8 @@
 #define ITEMVAL_8 (short*)&osd_roll
 //#define ITEMVAL_8 (short*)&debug2
 
+// removed all of this, because it wasnt working
+// only 15 parameters possible atm afaik
 // Climb rate and GPS pos added
 //#define ITEMNAME_6 F("Climb")
 //#define ITEMTYPE_6 F("m/s")
@@ -93,15 +93,6 @@
 #define ITEMNAME_9 F("Climb")
 #define ITEMTYPE_9 F("m/s")
 #define ITEMVAL_9  &osd_climb
-
-//#define ITEMNAME_9 F("Batt %")
-//#define ITEMTYPE_9 F("%")
-//#define ITEMVAL_9 (short*)&osd_battery_remaining_A
-
-//#define ITEMNAME_9 F("Alt")
-//#define ITEMTYPE_9 F("m")
-//#define ITEMVAL_9 &osd_alt
-//#define ITEMVAL_9 &debug3
 
 #define ITEMNAME_10 F("Home Dir")
 #define ITEMTYPE_10 F("Deg")
@@ -543,12 +534,9 @@ void process_screens()
       strcat((char*)&msg_line1,(char*)&temp);
       strcat_P((char*)&msg_line1,(prog_char*)F("V"));
 
-     // strncpy((char*)&msg_line2,(char*)LastMessage,LCDMaxPos/2); removed this HW 2017-07-23
-     
-     // and replaced by this 
       
-          const __FlashStringHelper* mode_str=F("unkn");
-    if(apm_mav_type == 1){ //ArduPlane
+        const __FlashStringHelper* mode_str=F("unkn");
+     if(apm_mav_type == 1){ //ArduPlane
         if (osd_mode == 0)       mode_str = F("Manu"); //Manual
         else if (osd_mode == 1)  mode_str = F("Circ"); //Circle
         else if (osd_mode == 2)  mode_str = F("Stab"); //Stabilize
@@ -584,10 +572,8 @@ void process_screens()
         else if (osd_mode == 16) mode_str = F("PosH"); //Hybrid: position hold with manual override
     }
     
- 
-    //  msg_line1[0] = 0;      msg_line2[0] = 0; removed  HW 2017-07-23
-        strcat_P((char*)&msg_line2,(prog_char*)mode_str);
-       strcat_P((char*)&msg_line2,(prog_char*)F(" Alt:"));
+      strcat_P((char*)&msg_line2,(prog_char*)mode_str);
+      strcat_P((char*)&msg_line2,(prog_char*)F(" Alt:"));
       temp[0] = 0;
       floatToString((char*)&temp,osd_alt,1);
       strcat((char*)&msg_line2,(char*)&temp);
@@ -602,41 +588,35 @@ void process_screens()
       floatToString((char*)&temp,osd_alt,1);
       strcat((char*)&msg_line1,(char*)&temp);
       strcat_P((char*)&msg_line1,(prog_char*)F("m")); 
-      
       strcat_P((char*)&msg_line2,(prog_char*)F("Dis:"));
-     temp[0] = 0;
+      temp[0] = 0;
       floatToString((char*)&temp,osd_home_distance,0);
       itoa(osd_home_distance,(char*)&temp,10);
       strcat((char*)&msg_line2,(char*)&temp);
       strcat_P((char*)&msg_line2,(prog_char*)F(" Dir:"));
       floatToString((char*)&temp,osd_home_heading,0);
       itoa (osd_home_heading,(char*)&temp,10);
-      strcat((char*)&msg_line2,(char*)&temp);
-      //strcat_P((char*)&msg_line2,(prog_char*)F("°")); //removed becasue of suspected overflow of line2 in jetibox, HW 2017-07-23
-      
-
+      strcat((char*)&msg_line2,(char*)&temp);   
       JB.JetiBox((char*)&msg_line1,(char*)&msg_line2);
-      break;}    
+    break;}    
+		  
     case 4 :{    
       msg_line1[0] = 0;      msg_line2[0] = 0;
       temp[0] = 0;
       strcat_P((char*)&msg_line1,(prog_char*)F("Power "));
-
       floatToString((char*)&temp,osd_vbat_A,1);
       strcat((char*)&msg_line1,(char*)&temp);
       strcat_P((char*)&msg_line1,(prog_char*)F("V "));
-      
       temp[0] = 0;
       itoa(osd_curr_A,(char*)&temp,10);
       strcat((char*)&msg_line2,(char*)&temp);
       strcat_P((char*)&msg_line2,(prog_char*)F("A "));
-
       itoa (osd_capacity_mA,(char*)&temp,10);
       strcat((char*)&msg_line2,(char*)&temp);
       strcat_P((char*)&msg_line2,(prog_char*)F("mAh"));      
-      
       JB.JetiBox((char*)&msg_line1,(char*)&msg_line2);
-      break;}    
+      break;}  
+		  
     case 5 :{    
       msg_line1[0] = 0;      msg_line2[0] = 0;
       strcat_P((char*)&msg_line1,(prog_char*)F("Rol:"));
@@ -646,17 +626,13 @@ void process_screens()
       strcat_P((char*)&msg_line1,(prog_char*)F(" Yaw:"));
       itoa (osd_yaw,(char*)&temp,10);
       strcat((char*)&msg_line1,(char*)&temp);
-
       strcat_P((char*)&msg_line2,(prog_char*)F("Pit:"));
       temp[0] = 0;
       itoa(osd_pitch,(char*)&temp,10);
-      strcat((char*)&msg_line2,(char*)&temp);
-//      strcat_P((char*)&msg_line2,(prog_char*)F(" Alt:"));
-//      floatToString((char*)&temp,osd_alt,1);
-//      strcat((char*)&msg_line1,(char*)&temp);
-	    
+      strcat((char*)&msg_line2,(char*)&temp);    
       JB.JetiBox((char*)&msg_line1,(char*)&msg_line2);
       break;}    
+		  
     case MAX_SCREEN :{ 
 
       msg_line1[0] = 0;      msg_line2[0] = 0;
@@ -671,8 +647,7 @@ void process_screens()
             if (current_config !=0)
               {
                //read from array to  
-                
-                
+                                
               }
             alarm_id = current_config;
           }
