@@ -591,11 +591,11 @@ void process_screens()
       strcat_P((char*)&msg_line2,(prog_char*)F("Vel:"));
       temp[0] = 0;
       floatToString((char*)&temp,osd_groundspeed,0);
-      itoa(osd_home_distance,(char*)&temp,10);
+      // itoa(osd_groundspeed,(char*)&temp,10);
       strcat((char*)&msg_line2,(char*)&temp);
       strcat_P((char*)&msg_line2,(prog_char*)F(" Dir:"));
       floatToString((char*)&temp,osd_heading,0);
-      itoa (osd_home_heading,(char*)&temp,10);
+      itoa (osd_heading,(char*)&temp,10);
       strcat((char*)&msg_line2,(char*)&temp);   
       JB.JetiBox((char*)&msg_line1,(char*)&msg_line2);
     break;}    
