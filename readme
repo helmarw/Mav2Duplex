@@ -1,4 +1,19 @@
 Mav2Duplex 
+Version 1.1c 2017-07-25
+
+Fixes: 
+- removed most of the GPS stuff, since it did not compute anyways, and added a few other sensors instead
+- modified the jetibox screen accordingly
+
+Issues:
+- alarms needs to be updated still
+
+see picture for SR#-parameters
+
+--------------
+
+
+Mav2Duplex 
 Version 1.1b 2017-07-23
 
 Fixes: 
