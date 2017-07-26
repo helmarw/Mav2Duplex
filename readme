@@ -4,11 +4,39 @@ Version 1.1c 2017-07-25
 Fixes: 
 - removed most of the GPS stuff, since it did not compute anyways, and added a few other sensors instead
 - modified the jetibox screen accordingly
-
-Issues:
-- alarms needs to be updated still
+- alarms updated 
 
 see picture for SR#-parameters
+
+Sensors:
+#define ITEMNAME_1 F("Armed")
+#define ITEMNAME_2 F("Alt")
+#define ITEMNAME_3 F("Batt V")
+#define ITEMNAME_4 F("Batt A")
+#define ITEMNAME_5 F("Batt C")
+#define ITEMNAME_6 F("Yaw")
+#define ITEMNAME_7 F("Pitch")
+#define ITEMNAME_8 F("Roll")
+#define ITEMNAME_9 F("Climb")
+#define ITEMNAME_10 F("Air Speed")
+#define ITEMNAME_11 F("Heading")
+#define ITEMNAME_12 F("HDOP")
+#define ITEMNAME_13 F("GPS Lock")
+#define ITEMNAME_14 F("GPS Sat")
+#define ITEMNAME_15 F("Ground Speed")
+
+JetiBox:
+screen0: About
+screen1: Armed/Dis; GPS Lock: GPS Sat; Batt V
+         Mode; Alt:
+screen2: Last Message from Mavlink
+screen3: Alt:
+         Groundspeed; Heading
+screen4: Batt V; 
+         Batt A; Batt C
+screen5: Rol:, Yaw:
+         Pit:
+screen6: Alarms Max(Batt V, Batt C, Alt, Air Speed)
 
 --------------
 
