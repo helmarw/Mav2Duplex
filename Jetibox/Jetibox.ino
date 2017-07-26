@@ -362,8 +362,8 @@ void InitAlarms()
   Alarms[2].alarm = 'A';
   Alarms[2].reset_alarm = 0;
   
-  Alarms[3].name =F( "Max Distance");
-  Alarms[3].type =F( "m");
+  Alarms[3].name =F( "Max Velocity");
+  Alarms[3].type =F( "m/s");
   Alarms[3].limit_max = 200;
   Alarms[3].limit_min = 1;
   Alarms[3].val_step = 10;
@@ -686,7 +686,7 @@ void process_screens()
   ProcessAlarm(0,osd_vbat_A);
   ProcessAlarm(1,osd_capacity_mA);
   ProcessAlarm(2,osd_alt);
-  ProcessAlarm(3,osd_home_distance);
+  ProcessAlarm(3,osd_airspeed);
   
   
   
