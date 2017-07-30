@@ -108,7 +108,7 @@
 
 #define ITEMNAME_13 F("GPS Lock")
 #define ITEMTYPE_13 F("")
-#define ITEMVAL_13 (short*)&osd_fix_type_jeti
+#define ITEMVAL_13 (short*)&osd_fix_type
 
 #define ITEMNAME_14 F("GPS Sat")
 #define ITEMTYPE_14 F("")
@@ -506,16 +506,16 @@ void process_screens()
         else
         strcat_P((char*)&msg_line1,(prog_char*)F("DIS "));
 
-      if (osd_fix_type_jeti == 0)
+      if (osd_fix_type == 0)
         strcat_P((char*)&msg_line1,(prog_char*)F("NO:")); // no Sats, HW 2017-07-23
         else
-        if (osd_fix_type_jeti == 1)
+        if (osd_fix_type == 1)
           strcat_P((char*)&msg_line1,(prog_char*)F("NO:")); // <3 Sats, 1D but essentially NO Fix too, HW 2017-07-23
           else
-          if (osd_fix_type_jeti == 2)
+          if (osd_fix_type == 2)
             strcat_P((char*)&msg_line1,(prog_char*)F("2D:"));  // 3-4 Sats, HW 2017-07-23 
              else
-             if (osd_fix_type_jeti >= 3)
+             if (osd_fix_type >= 3)
                  strcat_P((char*)&msg_line1,(prog_char*)F("3D:"));  // >4 Sats, HW 2017-07-23          
 
       temp[0] = 0;
@@ -791,7 +791,7 @@ void loop()
 //    if (Serial.available() > 0) //at least beat should fill
 //      read_mavlink(5);
 
-    setHomeVars();   // calculate and set Distance from home and Direction to home and gps fix type
+//    setHomeVars();   // calculate and set Distance from home and Direction to home and gps fix type
    
     
 //    if (Serial.available() > 0) //at least beat should fill
